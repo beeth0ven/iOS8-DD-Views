@@ -19,9 +19,6 @@ class ViewController: UIViewController {
     
     private func autoLayout() {
         
-        var constraintsWith = [NSLayoutConstraint]()
-        var constraintsWithout = [NSLayoutConstraint]()
-        
         let redView = UIView()
         redView.backgroundColor = UIColor.redColor()
         redView.setTranslatesAutoresizingMaskIntoConstraints(false)
@@ -30,62 +27,115 @@ class ViewController: UIViewController {
         yellowView.backgroundColor = UIColor.yellowColor()
         yellowView.setTranslatesAutoresizingMaskIntoConstraints(false)
         
-        let blueView = UIView()
-        blueView.backgroundColor = UIColor.blueColor()
-        blueView.setTranslatesAutoresizingMaskIntoConstraints(false)
-        
         view.addSubview(redView)
-        view.addSubview(yellowView)
-        view.addSubview(blueView)
+        redView.addSubview(yellowView)
         
-        let c1 = NSLayoutConstraint.constraintsWithVisualFormat(
-            "H:|-20-[view(100)]",
-            options: nil,
-            metrics: nil,
-            views: ["view":redView]) as [NSLayoutConstraint]
+        view.addConstraints(
+            NSLayoutConstraint.constraintsWithVisualFormat(
+                "H:|-(0)-[redView]-(0)-|",
+                options: nil,
+                metrics: nil,
+                views: ["redView":redView])
         
-        let c2 = NSLayoutConstraint.constraintsWithVisualFormat(
-            "H:|-20-[view(100)]",
-            options: nil,
-            metrics: nil,
-            views: ["view":yellowView]) as [NSLayoutConstraint]
+        )
         
-        let c3 = NSLayoutConstraint.constraintsWithVisualFormat(
-            "H:|-20-[view(100)]",
-            options: nil,
-            metrics: nil,
-            views: ["view":blueView]) as [NSLayoutConstraint]
+        view.addConstraints(
+            NSLayoutConstraint.constraintsWithVisualFormat(
+                "V:|-(0)-[redView]-(0)-|",
+                options: nil,
+                metrics: nil,
+                views: ["redView":redView])
+            
+        )
         
-        let c4 = NSLayoutConstraint.constraintsWithVisualFormat(
-            "V:|-100-[view(20)]",
-            options: nil,
-            metrics: nil,
-            views: ["view":redView]) as [NSLayoutConstraint]
+        redView.preservesSuperviewLayoutMargins = false
         
-        let c5with = NSLayoutConstraint.constraintsWithVisualFormat(
-            "V:[redView]-20-[yellowView(20)]-20-[blueView(20)]",
-            options: nil,
-            metrics: nil,
-            views: ["redView":redView, "yellowView":yellowView, "blueView":blueView]) as [NSLayoutConstraint]
         
-        let c5without = NSLayoutConstraint.constraintsWithVisualFormat(
-            "V:[redView]-20-[blueView(20)]",
-            options: nil,
-            metrics: nil,
-            views: ["redView":redView, "blueView":blueView]) as [NSLayoutConstraint]
+        redView.addConstraints(
+            NSLayoutConstraint.constraintsWithVisualFormat(
+                "H:|-[yellowView]-|",
+                options: nil,
+                metrics: nil,
+                views: ["yellowView":yellowView])
+            
+        )
         
-        constraintsWith.extend(c1)
-        constraintsWith.extend(c2)
-        constraintsWith.extend(c3)
-        constraintsWith.extend(c4)
-        constraintsWith.extend(c5with)
-
-        constraintsWithout.extend(c1)
-        constraintsWithout.extend(c3)
-        constraintsWithout.extend(c4)
-        constraintsWithout.extend(c5without)
+        redView.addConstraints(
+            NSLayoutConstraint.constraintsWithVisualFormat(
+                "V:|-[yellowView]-|",
+                options: nil,
+                metrics: nil,
+                views: ["yellowView":yellowView])
+            
+        )
         
-        NSLayoutConstraint.activateConstraints(constraintsWithout)
+//        var constraintsWith = [NSLayoutConstraint]()
+//        var constraintsWithout = [NSLayoutConstraint]()
+//        
+//        let redView = UIView()
+//        redView.backgroundColor = UIColor.redColor()
+//        redView.setTranslatesAutoresizingMaskIntoConstraints(false)
+//        
+//        let yellowView = UIView()
+//        yellowView.backgroundColor = UIColor.yellowColor()
+//        yellowView.setTranslatesAutoresizingMaskIntoConstraints(false)
+//        
+//        let blueView = UIView()
+//        blueView.backgroundColor = UIColor.blueColor()
+//        blueView.setTranslatesAutoresizingMaskIntoConstraints(false)
+//        
+//        view.addSubview(redView)
+//        view.addSubview(yellowView)
+//        view.addSubview(blueView)
+//        
+//        let c1 = NSLayoutConstraint.constraintsWithVisualFormat(
+//            "H:|-20-[view(100)]",
+//            options: nil,
+//            metrics: nil,
+//            views: ["view":redView]) as [NSLayoutConstraint]
+//        
+//        let c2 = NSLayoutConstraint.constraintsWithVisualFormat(
+//            "H:|-20-[view(100)]",
+//            options: nil,
+//            metrics: nil,
+//            views: ["view":yellowView]) as [NSLayoutConstraint]
+//        
+//        let c3 = NSLayoutConstraint.constraintsWithVisualFormat(
+//            "H:|-20-[view(100)]",
+//            options: nil,
+//            metrics: nil,
+//            views: ["view":blueView]) as [NSLayoutConstraint]
+//        
+//        let c4 = NSLayoutConstraint.constraintsWithVisualFormat(
+//            "V:[tlg]-[view(20)]",
+//            options: nil,
+//            metrics: nil,
+//            views: ["tlg":topLayoutGuide, "view":redView]) as [NSLayoutConstraint]
+//        
+//        let c5with = NSLayoutConstraint.constraintsWithVisualFormat(
+//            "V:[redView]-20-[yellowView(20)]-20-[blueView(20)]",
+//            options: nil,
+//            metrics: nil,
+//            views: ["redView":redView, "yellowView":yellowView, "blueView":blueView]) as [NSLayoutConstraint]
+//        
+//        let c5without = NSLayoutConstraint.constraintsWithVisualFormat(
+//            "V:[redView]-20-[blueView(20)]",
+//            options: nil,
+//            metrics: nil,
+//            views: ["redView":redView, "blueView":blueView]) as [NSLayoutConstraint]
+//        
+//        constraintsWith.extend(c1)
+//        constraintsWith.extend(c2)
+//        constraintsWith.extend(c3)
+//        constraintsWith.extend(c4)
+//        constraintsWith.extend(c5with)
+//
+//        constraintsWithout.extend(c1)
+//        constraintsWithout.extend(c3)
+//        constraintsWithout.extend(c4)
+//        constraintsWithout.extend(c5without)
+//        
+//        NSLayoutConstraint.activateConstraints(constraintsWith)
         
         
 //        let purpleView = UIView(frame: CGRectMake(100, 111, 132, 194))
